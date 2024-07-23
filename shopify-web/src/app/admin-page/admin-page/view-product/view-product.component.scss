@@ -37,8 +37,13 @@ mat-form-field{
     width: 100% !important;
 }
 
-tr{
-    flex-wrap: nowrap;
-    justify-content: center;
+// tr{
+//     flex-wrap: nowrap;
+//     justify-content: center;
+// }
+
+td, th {
+    text-align: center !important;
+    vertical-align: middle !important;
 }
   

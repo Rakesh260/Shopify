@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from product_admin_app.models import ProductDetails
+from .models import ProductDetails
 
 
 class ProductDetailsSerializer(serializers.ModelSerializer):
