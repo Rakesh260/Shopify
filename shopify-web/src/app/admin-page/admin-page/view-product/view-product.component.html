@@ -1,12 +1,79 @@
 <mat-toolbar>
-    <span>Your Application</span>
-    
+    <span>Shopify</span>
+    <button mat-flat-button style="background-color: #eb3248e3;color: white;" (click)="createProduct()">Add Product</button>
 </mat-toolbar>
 <div>
-    <mat-form-field hintLabel="Max 10 characters">
-        <mat-label>Enter some input</mat-label>
-        <input matInput #input maxlength="10" placeholder="Enter Name">
-      </mat-form-field>
-      
+    <mat-form-field>
+        <mat-label> Name</mat-label>
+        <input matInput #input maxlength="10" placeholder="Enter Name" [(ngModel)]="name" (input)="getProductDetails()">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Min Price</mat-label>
+      <mat-select placeholder="Select Price Range" [(ngModel)]="price" (selectionChange)="getProductDetails()">
+        <mat-option *ngFor="let range of priceRange" [value]="range.value">{{ range.key }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Brand</mat-label>
+      <input matInput #input maxlength="10" placeholder="Enter Brand Name" [(ngModel)]="brand" (input)="getProductDetails()">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Product Type</mat-label>
+      <input matInput #input maxlength="10" placeholder="Enter Product Type" [(ngModel)]="productType" (input)="getProductDetails()">
+    </mat-form-field>
+
+    <button mat-flat-button style="background-color: #eb3248e3;color: white;text-align: center;" (click)="resetFilters()">Reset</button>
 
 </div>
+<section>
+
+  <table mat-table [dataSource]="productDetailsData"  class="mat-elevation-z8 mat-table">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="brand">
+      <th mat-header-cell *matHeaderCellDef> Brand </th>
+      <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="productType">
+      <th mat-header-cell *matHeaderCellDef> Product Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.product_type}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description || '--'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element"> 
+        <mat-icon title="Edit" style="color:  #348cb7;" (click)="editProduct(element.id)">edit</mat-icon> 
+        <mat-icon title="Delete" style="color: red;" (click)="deleteProduct(element.id)">delete</mat-icon></td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+  </table>
+  <mat-paginator [length]='totalLength'
+              [pageSize]="pageLength"
+              [pageSizeOptions]="[5, 10, 25]"
+              (page)="loadProducts($event.pageIndex, $event.pageSize)"
+              aria-label="Select page">
+  </mat-paginator>
+  
+  
+</section>

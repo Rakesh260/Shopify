@@ -1,6 +1,44 @@
 mat-toolbar{
     background-color: #348cb7;
+    color: white;
+    display: flex;
+    justify-content:space-between;
 }
-// mat-form-field{
-//     background-color: #bcbeccd1;
-// }
+section{
+    margin-top: 3%;
+}
+
+
+mat-form-field{
+    margin: 5px;
+    padding: 10px;
+}
+
+.mat-header-row,
+.mat-row {
+    display: flex;
+    width: 100%;
+}
+  
+.mat-header-cell,
+.mat-cell {
+    flex: 1; 
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+::ng-deep .mat-paginator .mat-paginator-container {
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+::ng-deep .mat-table{
+    width: 100% !important;
+}
+
+tr{
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+  

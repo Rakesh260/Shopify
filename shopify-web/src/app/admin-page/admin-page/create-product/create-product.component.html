@@ -1,1 +1,39 @@
-<p>create-product works!</p>
+<mat-toolbar >
+    <span>{{button}} Product</span>
+    <mat-icon (click)="cancelButton('cancel')" >cancel</mat-icon>
+</mat-toolbar>
+
+<section>
+    <form #productForm="ngForm" (ngSubmit)="submitForm()">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput name="name" maxlength="64" placeholder="Ex: TV" [(ngModel)]="name" required>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <mat-label>Price</mat-label>
+          <input matInput name="price" type="number" minlength="2" maxlength="5" placeholder="Ex: 10000" [(ngModel)]="price" required>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <mat-label>Brand</mat-label>
+          <input matInput name="brand" maxlength="64" placeholder="Ex: LG" [(ngModel)]="brand" required>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <mat-label>Product Type</mat-label>
+          <input matInput name="product_type" maxlength="64" placeholder="Ex: Electronics" [(ngModel)]="product_type" required>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <input matInput name="description" maxlength="132" placeholder="Ex: 32 inches, HD TV" [(ngModel)]="description">
+        </mat-form-field>
+      
+        <div style="display: flex;justify-content: center;"> <button mat-flat-button [ngStyle]="{'background-color': !productForm.valid || validateData()  ? '' : '#348cb7', 'color': productForm.valid ? 'white' : ''}" 
+            [disabled]="!productForm.valid || validateData()">{{button}}</button>
+        </div>
+      </form>
+      
+  
+</section>
